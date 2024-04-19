@@ -1,7 +1,11 @@
+import { useNavigate } from "react-router-dom";
 import Input from "../../components/Input";
 import styled from "styled-components";
+import { useEffect } from "react";
 
 const SignIn = () => {
+  const isLoggedIn = !!localStorage.getItem("userData");
+  const navigate = useNavigate();
   const Button = styled.button`
     background-color: #f2f2f2;
     color: black;
@@ -41,6 +45,28 @@ const SignIn = () => {
     gap: 10px;
     flex-direction: column;
   `;
+
+  const handleLogin = async () => {
+    const mockData = {
+      email: "example@example.com",
+      password: "examplepassword",
+      token: "mocktoken123",
+    };
+    // const res=await fetch.post("api/auth/signin",{
+    //   ID:email,
+    //   password:password
+    // })
+    // if (res.data.ok) {
+    localStorage.setItem("userData", JSON.stringify(mockData));
+    navigate("/");
+    // }
+  };
+  useEffect(() => {
+    if (isLoggedIn) {
+      navigate("/");
+    }
+  }, [isLoggedIn, navigate]);
+
   return (
     <Wrapper>
       <TextWrapper>
@@ -56,7 +82,7 @@ const SignIn = () => {
         <Input placeholder="Email or phone number" />
         <Input placeholder="Password" />
         <ButtonWrapper>
-          <Button>Log In</Button>
+          <Button onClick={handleLogin}>Log In</Button>
           <Button>Sign Up</Button>
         </ButtonWrapper>
       </LoginForm>

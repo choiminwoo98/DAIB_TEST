@@ -3,8 +3,9 @@ import styled from "styled-components";
 import { IoIosArrowBack } from "react-icons/io";
 import { CiSearch } from "react-icons/ci";
 import { GiHamburgerMenu } from "react-icons/gi";
-import { useState } from "react";
+import { useCallback, useState } from "react";
 import { FaPlus } from "react-icons/fa";
+import { formatTime } from "../util";
 interface ChatBubbleProps {
   sender: "me" | "other";
 }
@@ -18,7 +19,8 @@ const ChatRoom = () => {
   const [inputText, setInputText] = useState("");
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setInputText(e.target.value);
+    const newValue = e.target.value;
+    setInputText(newValue);
   };
 
   const handleSubmit = () => {};
@@ -162,27 +164,11 @@ const ChatRoom = () => {
         userId: "friend456",
         username: "(광고)광화문석갈비",
         profileImageUrl: "https://example.com/friend2.jpg",
+        phone: "010-9183-3948",
       },
     ],
   };
-  const formatTime = (timestamp: string): string => {
-    const messageTime = new Date(timestamp);
-    const currentTime = new Date();
 
-    const timeDifference = Math.floor(
-      (currentTime.getTime() - messageTime.getTime()) / (1000 * 60 * 60 * 24)
-    );
-
-    if (timeDifference === 0) {
-      const hours = messageTime.getHours().toString().padStart(2, "0");
-      const minutes = messageTime.getMinutes().toString().padStart(2, "0");
-      return `${hours}:${minutes}`;
-    } else if (timeDifference === 1) {
-      return "1일 전";
-    } else {
-      return `${timeDifference}일 전`;
-    }
-  };
   return (
     <Wrapper>
       <Content>
@@ -199,8 +185,10 @@ const ChatRoom = () => {
               color: "white",
             }}
           >
-            <span>title</span>
-            <span style={{ color: "gray" }}>010-9183-3948</span>
+            <span>{chatData.participants[1].username}</span>
+            <span style={{ color: "gray" }}>
+              {chatData.participants[1].phone}
+            </span>
           </div>
           <div
             style={{
