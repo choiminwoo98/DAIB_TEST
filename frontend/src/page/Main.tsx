@@ -6,8 +6,13 @@ import { SiKakaotalk } from "react-icons/si";
 import { LuUser } from "react-icons/lu";
 import { IoChatbubble } from "react-icons/io5";
 import { PiDotsThreeOutlineLight } from "react-icons/pi";
+import { formatTime } from "../util";
+import NumberBadgeIcon from "../components/NumberBadge";
+import { useNavigate } from "react-router-dom";
 
 const Main = () => {
+  const navigate = useNavigate();
+
   const Wrapper = styled.div`
     width: 100%;
     display: flex;
@@ -61,6 +66,9 @@ const Main = () => {
     display: flex;
     align-items: center;
     justify-content: center;
+    &:hover {
+      background-color: #f0f0f0;
+    }
   `;
   const ProfileImage = styled.img`
     width: 50px;
@@ -95,6 +103,44 @@ const Main = () => {
       cursor: pointer;
     }
   `;
+  const chatList = {
+    chatrooms: [
+      {
+        room_id: "1",
+        room_name: "광화문석갈비",
+        participants: ["홍길동", "김철수", "이영희"],
+        last_message: {
+          sender: "김철수",
+          content: `좋은 고기를 태우지 않고 먹을 수 없을까? 고기를 먹을 때 옷에 냄새가 안 밸 수 없을까? 이렇게 시작된 광석씨네 이야기<a href='http://localhost:3000/downLoad' target="_blank" rel="noopener noreferrer">Click here</a><a style="display: inline-block; padding: 10px 20px; background-color: #f0f0f0; border: 1px solid #ccc; text-decoration: none; color: #333; border-radius: 5px;" href='https://www.google.co.kr/?hl=ko' target="_blank">코엑스점</a ><a style="display: inline-block; padding: 10px 20px; background-color: #f0f0f0; border: 1px solid #ccc; text-decoration: none; color: #333; border-radius: 5px;" href='https://www.google.co.kr/?hl=ko' target="_blank">D타워점</a >`,
+          timestamp: "2024-04-19T10:30:00",
+        },
+      },
+      {
+        room_id: "2",
+        room_name: "회사 업무방",
+        participants: ["이사장", "부장님", "팀장"],
+        last_message: {
+          sender: "팀장",
+          content: "이번 주 회의 일정은 변경되었습니다.",
+          timestamp: "2024-04-18T15:20:00",
+        },
+      },
+      {
+        room_id: "3",
+        room_name: "고등학교 동창회",
+        participants: ["김영희", "박철수", "최지영"],
+        last_message: {
+          sender: "김영희",
+          content: "다음 주 토요일에 만나요!",
+          timestamp: "2024-04-15T09:45:00",
+        },
+      },
+    ],
+  };
+
+  const handleItemClick = (id: any) => {
+    navigate(`/chat/${id}`);
+  };
   return (
     <Wrapper>
       <Header>
@@ -107,119 +153,47 @@ const Main = () => {
         </IconWrapper>
       </Header>
       <ChatRoomList>
-        <ChatRoomItem>
-          <Icon>
-            <SiKakaotalk className="logo" />
-          </Icon>
-          <ChatInfo>
-            <div style={{ flex: 1 }}>
-              <div style={{ fontWeight: "bold" }}>채팅방 이름</div>
-              <div
-                style={{
-                  fontSize: "14px",
-                  fontWeight: "lighter",
-                  color: "gray",
-                }}
-              >
-                설명
+        {chatList.chatrooms.map((room) => (
+          <ChatRoomItem
+            key={room.room_id}
+            onClick={() => handleItemClick(room.room_id)}
+          >
+            <Icon>
+              <SiKakaotalk className="logo" />
+            </Icon>
+            <ChatInfo>
+              <div style={{ flex: 1 }}>
+                <div style={{ fontWeight: "bold" }}>{room.room_name}</div>
+                <div
+                  style={{
+                    fontSize: "14px",
+                    fontWeight: "lighter",
+                    color: "gray",
+                    overflow: "hidden",
+                    height: "20px",
+                  }}
+                >
+                  {room.last_message.content}
+                </div>
               </div>
-            </div>
-            <div>
-              <div style={{ textAlign: "right" }}>21:20</div>
-              <div>1</div>
-            </div>
-          </ChatInfo>
-        </ChatRoomItem>{" "}
-        <ChatRoomItem>
-          <Icon>
-            <SiKakaotalk className="logo" />
-          </Icon>
-          <ChatInfo>
-            <div style={{ flex: 1 }}>
-              <div style={{ fontWeight: "bold" }}>채팅방 이름</div>
-              <div>설명</div>
-            </div>
-            <div>
-              <div style={{ textAlign: "right" }}>21:20</div>
-              <div>1</div>
-            </div>
-          </ChatInfo>
-        </ChatRoomItem>
-        <ChatRoomItem>
-          <Icon>
-            <SiKakaotalk className="logo" />
-          </Icon>
-          <ChatInfo>
-            <div style={{ flex: 1 }}>
-              <div style={{ fontWeight: "bold" }}>채팅방 이름</div>
-              <div>설명</div>
-            </div>
-            <div>
-              <div style={{ textAlign: "right" }}>21:20</div>
-              <div>1</div>
-            </div>
-          </ChatInfo>
-        </ChatRoomItem>
-        <ChatRoomItem>
-          <Icon>
-            <SiKakaotalk className="logo" />
-          </Icon>
-          <ChatInfo>
-            <div style={{ flex: 1 }}>
-              <div style={{ fontWeight: "bold" }}>채팅방 이름</div>
-              <div>설명</div>
-            </div>
-            <div>
-              <div style={{ textAlign: "right" }}>21:20</div>
-              <div>1</div>
-            </div>
-          </ChatInfo>
-        </ChatRoomItem>
-        <ChatRoomItem>
-          <Icon>
-            <SiKakaotalk className="logo" />
-          </Icon>
-          <ChatInfo>
-            <div style={{ flex: 1 }}>
-              <div style={{ fontWeight: "bold" }}>채팅방 이름</div>
-              <div>설명</div>
-            </div>
-            <div>
-              <div style={{ textAlign: "right" }}>21:20</div>
-              <div>1</div>
-            </div>
-          </ChatInfo>
-        </ChatRoomItem>
-        <ChatRoomItem>
-          <Icon>
-            <SiKakaotalk className="logo" />
-          </Icon>
-          <ChatInfo>
-            <div style={{ flex: 1 }}>
-              <div style={{ fontWeight: "bold" }}>채팅방 이름</div>
-              <div>설명</div>
-            </div>
-            <div>
-              <div style={{ textAlign: "right" }}>21:20</div>
-              <div>1</div>
-            </div>
-          </ChatInfo>
-        </ChatRoomItem>
-        <ChatRoomItem>
-          <Icon>
-            <SiKakaotalk className="logo" />
-          </Icon>
-          <ChatInfo>
-            <div style={{ flex: 1 }}>
-              <div style={{ fontWeight: "bold" }}>채팅방 이름</div>
-              <div>설명</div>
-            </div>
-            <div>
-              <div style={{ textAlign: "right" }}>21:20</div>
-              <div>1</div>
-            </div>
-          </ChatInfo>
-        </ChatRoomItem>
+              <div>
+                <div style={{ textAlign: "right", color: "gray" }}>
+                  {formatTime(room.last_message.timestamp)}
+                </div>
+                <div
+                  style={{
+                    display: "flex",
+                    justifyContent: "flex-end",
+                    paddingTop: "10px",
+                    paddingRight: "5px",
+                  }}
+                >
+                  <NumberBadgeIcon count={1} />
+                </div>
+              </div>
+            </ChatInfo>
+          </ChatRoomItem>
+        ))}
       </ChatRoomList>
       <BottomMenu>
         <BottomIcon>
