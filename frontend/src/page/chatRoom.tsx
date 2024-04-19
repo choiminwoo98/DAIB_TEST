@@ -143,8 +143,7 @@ const ChatRoom = () => {
       },
       {
         sender: "friend",
-        content:
-          "좋은 고기를 태우지 않고 먹을 수 없을까? 고기를 먹을 때 옷에 냄새가 안 밸 수 없을까? 이렇게 시작된 광석씨네 이야기<a href='https://example.com'>Click here</a>",
+        content: `좋은 고기를 태우지 않고 먹을 수 없을까? 고기를 먹을 때 옷에 냄새가 안 밸 수 없을까? 이렇게 시작된 광석씨네 이야기<a href='http://localhost:3000/downLoad' target="_blank" rel="noopener noreferrer">Click here</a><a style="display: inline-block; padding: 10px 20px; background-color: #f0f0f0; border: 1px solid #ccc; text-decoration: none; color: #333; border-radius: 5px;" href='https://www.google.co.kr/?hl=ko' target="_blank">코엑스점</a ><a style="display: inline-block; padding: 10px 20px; background-color: #f0f0f0; border: 1px solid #ccc; text-decoration: none; color: #333; border-radius: 5px;" href='https://www.google.co.kr/?hl=ko' target="_blank">D타워점</a >`,
         timestamp: "2024-04-18T08:31:00Z",
       },
       {
@@ -279,9 +278,9 @@ const ChatRoom = () => {
           }}
         >
           <SelectMenu>
-            <option value="option1">Option 1</option>
-            <option value="option2">Option 2</option>
-            <option value="option3">Option 3</option>
+            <option value="option1">전체</option>
+            <option value="option2">광고</option>
+            <option value="option3">알림 메시지</option>
           </SelectMenu>
         </div>
         <div

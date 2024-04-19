@@ -6,6 +6,7 @@ import SignIn from "./page/Auth/SignIn";
 import SignUp from "./page/Auth/SignUp";
 import ChatRoom from "./page/chatRoom";
 import Layout from "./components/Layout";
+import DownLoad from "./page/download";
 // import { useQuery, gql } from "@apollo/client";
 // const GET_USERS = gql`
 //   query GetUsers {
@@ -26,6 +27,7 @@ function App() {
         <Route path="/Auth/signin" element={<SignIn />} />
         <Route path="/Auth/signup" element={<SignUp />} />
         <Route path="/Chat/:id" element={<ChatRoom />} />
+        <Route path="/DownLoad" element={<DownLoad />} />
       </Route>
     </Routes>
   );
